@@ -1,0 +1,52 @@
+<div id="all-form" class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-12">
+            {{# if CartProduct}}
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Purchase Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Remove</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {{# each CartProduct}}
+                        <tr>
+                            <th scope="row" onclick="location.href='/products/detail/{{this.sp_id}}'">{{this.name}}</th>
+                            <td>{{this.currentPrice}}</td>
+                            <td>
+                                <button id="Subtract" type="button" class="btn btn-primary"
+                                        onclick="location.href='/products/Subtract/{{this.sp_id}}'">-
+                                </button>
+                                <span id="quantity">{{currentQuantity}}</span>
+                                <button id="Add" type="button" class="btn btn-primary"
+                                        onclick="location.href='/products/Add/{{this.sp_id}}'">+
+                                </button>
+                            </td>
+                            <td>
+                                <button id="Remove" type="button" class="btn btn-primary"
+                                        onclick="location.href='/products/remove/{{this.sp_id}}'">Remove
+                                </button>
+                            </td>
+                        </tr>
+                    {{/each}}
+
+                    </tbody>
+                </table>
+
+                <p id="totalOrderAmount"><strong>Total Order Amount:</strong>{{totalOrderAmount}}</p>
+            <p>
+                <button id="checkOut" type="button" class="btn btn-primary"
+                        onclick="location.href='/products/checkout'">Check Out All Products
+                </button>
+            {{else}}
+                <h1 id="no-item">Your shopping cart is empty.</h1>
+            {{/if}}
+        </div>
+    </div>
+</div>
+

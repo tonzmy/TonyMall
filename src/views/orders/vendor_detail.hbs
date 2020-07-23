@@ -1,0 +1,91 @@
+<div id="all-form" class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-12">
+            <div class="panel panel-default">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>P.O. Number</th>
+                        <th>Purchase Date</th>
+                        <th>Address</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Status Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{# each order_detail}}
+                        <tr>
+                            <th scope="row">{{this.fullname}}</th>
+                            {{#if cancelled_by}}
+                                <td>{{this.po_no}} (Cancelled by {{this.cancelled_by}})</td>
+                            {{else}}
+                                <td>{{this.po_no}}</td>
+                            {{/if}}
+                            <td>{{this.date}}</td>
+                            <td>{{this.shipping_address}}</td>
+                            <td>{{this.po_amount}}</td>
+                            {{#if (check_type this.status 'pending')}}
+                                <td id="statusStyle2">{{this.status}}
+                                    <button type="button" class="btn btn-outline-warning"
+                                            onclick="location.href='/vendor/order/ship/{{this.po_no}}'">Ship
+                                    </button>
+                                    <button type="button" class="btn btn-outline-warning"
+                                            onclick="location.href='/vendor/order/hold/{{this.po_no}}'">Hold
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger"
+                                            onclick="location.href='/vendor/order/cancel/{{this.po_no}}'">Cancel
+                                    </button>
+                                </td>
+                            {{else if (check_type this.status 'hold')}}
+                                <td id="statusStyle">{{this.status}}
+                                    <button type="button" class="btn btn-outline-warning"
+                                            onclick="location.href='/vendor/order/ship/{{this.po_no}}'">Ship
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger"
+                                            onclick="location.href='/vendor/order/cancel/{{this.po_no}}'">Cancel
+                                    </button>
+                                </td>
+                            {{else}}
+                                <td>{{this.status}}</td>
+                            {{/if}}
+                            {{# if this.status_date}}
+                                <td>{{this.status_date}}</td>
+                            {{else}}
+                                <td>---</td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+                <p></p>
+                {{# if order_detail_product}}
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr class="info">
+                            <th>Product name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>subtotal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{# each order_detail_product}}
+                            <tr class="active">
+                                <th scope="row">{{this.name}}</th>
+                                <td>{{this.po_quantity}}</td>
+                                <td>{{this.po_price}}</td>
+                                <td>{{this.subtotal}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                {{/if}}
+            </div>
+
+        </div>
+    </div>
+</div>
+

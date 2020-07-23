@@ -1,0 +1,122 @@
+<link href="/stylesheets/fontawesome-all.css" rel="stylesheet">
+<div id="all-form" class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-12">
+            <div class="panel panel-default">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>P.O. Number</th>
+                        <th>Purchase Date</th>
+                        <th>Address</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Status Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{# each order_detail}}
+                        <tr>
+                            <th scope="row">{{this.fullname}}</th>
+                            {{#if cancelled_by}}
+                                <td>{{this.po_no}} (Cancelled by {{this.cancelled_by}})</td>
+                            {{else}}
+                                <td>{{this.po_no}}</td>
+                            {{/if}}
+
+                            <td>{{this.date}}</td>
+                            <td>{{this.shipping_address}}</td>
+                            <td>{{this.po_amount}}</td>
+                            {{#if (cancel this.status 'pending' 'hold')}}
+                                <td id="statusStyle">{{this.status}}
+                                    <button type="button" id="single-button" class="btn btn-outline-danger"
+                                            onclick="location.href='/order/cancel/{{this.po_no}}'">Cancel
+                                    </button>
+                                </td>
+                            {{else}}
+                                <td>{{this.status}}</td>
+                            {{/if}}
+                            {{# if this.status_date}}
+                                <td>{{this.status_date}}</td>
+                            {{else}}
+                                <td>---</td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+                <p></p>
+                {{# if orderDetailProduct}}
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr class="info">
+                            <th>Product name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>subtotal</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{# each orderDetailProduct}}
+                            <tr class="active">
+                                {{#if (check_type this.status 'shipped')}}
+                                    {{# if this.rates}}
+                                        <th scope="row">{{this.name}} (You have already reviewed)</th>
+                                    {{else}}
+                                        <th id="review" scope="row">{{this.name}}
+                                            <button id="single-button" type="button" class="btn btn-outline-success"
+                                                    onclick="review({{this.sp_id}}, {{this.po_no}})">Review
+                                            </button>
+                                        </th>
+                                    {{/if}}
+                                {{else}}
+                                    <th scope="row">{{this.name}}</th>
+                                {{/if}}
+                                <td>{{this.po_quantity}}</td>
+                                <td>{{this.po_price}}</td>
+                                <td>{{this.subtotal}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                {{/if}}
+            </div>
+            <div>
+                <div hidden id="review-box">
+                    <form id="form-review" method="POST" class="clearfix">
+                        <div class="form-group">
+                            <label for="Rate">Rate</label>
+                            <i id="rate" class="fas fa-star fa-3x"></i>
+                            <i id="rate" class="fas fa-star fa-3x"></i>
+                            <i id="rate" class="fas fa-star fa-3x"></i>
+                            <i id="rate" class="fas fa-star fa-3x"></i>
+                            <i id="rate" class="fas fa-star fa-3x"></i>
+                            <p id="text"></p>
+                            <p id="test"></p>
+                        </div>
+                        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                        <input id="rateNo" type="hidden" name="rateNo">
+                        <input id="sp_id" type="hidden" name="sp_id">
+                        <input id="po_no" type="hidden" name="po_no">
+                        <div class="form-group">
+                            <div>
+                                <label for="Comment">Post a Comment</label>
+                                <textarea id="message" class="form-control" rows="7" name="message"
+                                          required="required"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-danger btn-lg">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-outline-secondary btn-block my-5" onclick="location.href='/order'">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

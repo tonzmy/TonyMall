@@ -1,0 +1,74 @@
+<div id="order-form" class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-12">
+            {{#if order_package_list}}
+                <div class="panel panel-default">
+                <div class="form-row align-items-center">
+                    <div id="all-button">
+                        <a href="/vendor/order">
+                            <button type="button" class="btn btn-outline-primary">All</button>
+                        </a>
+                        <a href="/vendor/order/pending">
+                            <button type="button" id="current_purchases" class="btn btn-outline-info ">Pending Orders
+                            </button>
+                        </a>
+                        <a href="/vendor/order/hold">
+                            <button type="button" id="current_purchases" class="btn btn-outline-info ">Orders on Hold
+                            </button>
+                        </a>
+                        <a href="/vendor/order/past">
+                            <button type="button" id="past_purchases" class="btn btn-outline-info ">Past Orders</button>
+                        </a>
+                        <a href="/vendor/order/analysis">
+                            <button type="button" id="analyze_purchases" class="btn btn-outline-danger ">Analyze</button>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control" id="input_1" placeholder="enter a P.O. number">
+
+                    </div>
+
+                    <button type="submit" id="btn_1 single-button" class="btn btn-outline-info" onclick="search()">
+                        Search
+                    </button>
+                </div>
+
+                <table class="table table-hover table-striped" id="table_purchase">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Purchase Number</th>
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {{# each order_package_list}}
+                        <tr>
+                            <th scope="row" id="first-td"><a>{{this.po_no}}</a>
+                                <button type="button" id="single-button" class="btn btn-outline-secondary"
+                                        onclick="location.href='/vendor/order/{{this.po_no}}'">More
+                                </button>
+                            </th>
+                            <td>{{this.fullname}}</td>
+                            <td>{{this.date}}</td>
+                            <td>{{this.po_amount}}</td>
+                            <td>{{this.status}}</td>
+                        </tr>
+
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{else}}
+                <h1 id="no-order">There is no order.</h1>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,278 @@
+<div id="all-form" class="container">
+    <div class="row">
+        {{#if (checkVendor type 'customer')}}
+            {{#each data}}
+                <div class="col">
+                    <h3 id="detail-page-title">{{this.brand}} {{this.name}}</h3>
+                </div>
+                <div class="w-100"></div>
+                <div class="col my-3">
+                    <div id="detail-page-carousel" class="carousel slide" data-ride="carousel">
+
+                        <ol class="carousel-indicators">
+                            <li data-target="#detail-page-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#detail-page-carousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <div id="detail-page-carousel-inner" class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img id="detail-page-carousel-inner-block" class="d-block img-fluid" alt='Second slide' src= {{this.detail_image_1}} />
+                            </div>
+                            <div class="carousel-item">
+                                <img id="detail-page-carousel-inner-block" class="d-block img-fluid" alt="Second slide" src= {{this.detail_image_2}} />
+                            </div>
+                        </div>
+
+                        <a class="carousel-control-prev" href="#detail-page-carousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+
+                        <a class="carousel-control-next" href="#detail-page-carousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div id="detail-page-spec1"></div>
+                    <h5>
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt class="col-4">ID</dt>
+                            <dd class="col-3">{{this.sp_id}}</dd>
+                        </dl>
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt class="col-4">Processor</dt>
+                            <dd class="col-3">{{this.processor}}</dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt class="col-4">RAM</dt>
+                            <dd class="col-3">{{this.RAM}}</dd>
+                        </dl>
+
+                    </h5>
+                    <div id="detail-page-spec2"></div>
+                    <h2>
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt id="detail-page-price" class="col-2">RMB</dt>
+                            <dd class="col-3">{{this.currentPrice}}</dd>
+                        </dl>
+
+                    </h2>
+                    <div id="detail-page-spec3"></div>
+                    <button type="button" onclick="location.href='/products/AddToCart/{{this.sp_id}}'" id="detail-page-addToShoppingCart" class="btn btn-primary btn-lg btn-block">Add  to shopping cart</button>
+                </div>
+            {{/each}}
+        {{else}}
+            {{#each data}}
+                <div class="col">
+                    <h3 id="detail-page-title">{{this.brand}} {{this.name}}</h3>
+                </div>
+                <div class="w-100"></div>
+
+                <div class="col">
+                    <div id="detail-page-carousel" class="carousel slide" data-ride="carousel">
+
+                        <ol class="carousel-indicators">
+                            <li data-target="#detail-page-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#detail-page-carousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <div id="detail-page-carousel-inner" class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img id="detail-page-carousel-inner-block" class="d-block img-fluid" alt='Second slide' src= {{this.detail_image_1}} />
+                            </div>
+                            <div class="carousel-item">
+                                <img id="detail-page-carousel-inner-block" class="d-block img-fluid" alt="Second slide" src= {{this.detail_image_2}} />
+                            </div>
+                        </div>
+
+                        <a class="carousel-control-prev" href="#detail-page-carousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+
+                        <a class="carousel-control-next" href="#detail-page-carousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div id="detail-page-spec1"></div>
+                    <h5>
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt class="col-4">ID</dt>
+                            <dd class="col-3">{{this.sp_id}}</dd>
+                        </dl>
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt class="col-4">Processor</dt>
+                            <dd class="col-3">{{this.processor}}</dd>
+                        </dl>
+
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt class="col-4">RAM</dt>
+                            <dd class="col-3">{{this.RAM}}</dd>
+                        </dl>
+
+                    </h5>
+                    <div id="detail-page-spec2"></div>
+                    <h2>
+                        <dl class="row">
+                            <dd class="col-3"></dd>
+                            <dt id="detail-page-price" class="col-2">RMB</dt>
+                            <dd class="col-3">{{this.currentPrice}}</dd>
+                        </dl>
+
+                    </h2>
+                    <div id="detail-page-spec3"></div>
+
+                    <button type="button" id="#detail-page-changePrice" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">Change Price</button>
+
+                    <div class="modal fade" id="exampleModalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Change Price</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="needs-validation">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="price" >Price:</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="price">
+                                                <div hidden id="invalid">
+                                                    Please input valid and less than 8 digits number.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="changePrice({{this.sp_id}})">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        {{/if}}
+    </div>
+    <!--<button class="btn btn-outline-secondary btn-lg btn-block" onclick="location.href='/products'">Back</button>-->
+
+    {{#if numberOfRatings}}
+    <div id="customer-reviews" class="card card-outline-secondary my-4">
+        <div class="card-header">
+            Customer Reviews
+        </div>
+        <div id="card-body-rate" class="card-body">
+            <div class="container">
+                <div class="row">
+                    {{#each data}}
+                    <div class="col-2">
+                        <h1 id="card-body-rate-No">
+                        {{this.starRating}}
+                        </h1>out of 5 stars
+                    </div>
+                    <div class="star-rating">
+                        <div class="back-stars">
+                            <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                            <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                            <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                            <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                            <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+
+
+                            <div class="front-stars" style="width: {{this.starRatingInPercent}}%">
+                                <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                                <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                                <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                                <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                                <a id="detail-page-avgRate" class="fa fa-star" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        {{#each reviewData}}
+
+        <div class="card-body">
+            <hr>
+            <div class="container">
+                <div class="row">
+                    <h5 class="col-2">
+                    {{this.user_id}}
+                    </h5>
+                    <div class="col-9">
+                        <div class="star-rating">
+                    <div class="back-stars">
+                        <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                        <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                        <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                        <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                        <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+
+
+                        <div class="front-stars" style="width: {{this.ratesInPercent}}%">
+                            <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                            <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                            <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                            <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                            <a class="fa fa-star" id="detail-page-everyRate" aria-hidden="true"></a>
+                        </div>
+                    </div>
+                    <small class="text-muted">{{this.rates}}</small>
+                </div>
+                        <p id="detail-page-everyReview">{{this.reviews}}</p>
+                        <!--<small class="review-text-muted">time</small>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    {{/each}}
+    </div>
+    {{else}}
+        <div class="card card-outline-secondary my-4" id="customer-reviews">
+            <div class="card-header">
+                Customer Reviews
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        {{#each data}}
+                            <div class="col-3">
+                            </div>
+                            <h2 class="col" id="card-body-inadequateReview">
+
+                                Sorry, there are only few reviews.
+
+                            </h2>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+
+
+</div>
+
+<div id="page-space"></div>

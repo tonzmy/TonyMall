@@ -1,0 +1,33 @@
+<div class="container">
+<div  id="log-form" class="row">
+    <div class="col-3"></div>
+    <div class="col-md-6">
+        <h1>Sign Up</h1>
+        <form action="/user/signup" method="POST">
+            <div class="form-group">
+                <label for="user">User ID</label>
+                <input type="text" id="user" name="user" placeholder="your user ID" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" minlength="2" pattern="^[A-Z].+"  id="fullname" name="fullname" placeholder="Must be capital letter" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email_address">Email Address</label>
+                <input type="email" id="email_address" name="email_address" placeholder="example@gmail.com"  class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="shipping_address">Shipping Address</label>
+                <input type="text" id="shipping_address" name="shipping_address" placeholder="your shipping address" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password_sign">Password</label>
+                <input type="password" minlength="6" id="password_sign" name="password_sign" placeholder="at least 6 digital" class="form-control" required>
+            </div>
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <button type="submit" class="btn btn-outline-primary pull-right">Sign Up</button>
+        </form>
+    </div>
+</div>
+</div>
+<div id="page-space"></div>

@@ -1,0 +1,57 @@
+<div id="order-form" class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-12">
+
+                <div>
+                    <div id="all-button">
+                        <a href="/order">
+                            <button type="button" id="all_purchases" class="btn btn-outline-primary">All</button>
+                        </a>
+                    </div>
+                    <div id="all-button">
+                        <a href="/order/current">
+                            <button type="button" id="current_purchases" class="btn btn-outline-info ">Current
+                                Purchases
+                            </button>
+                        </a>
+                    </div>
+                    <div id="all-button">
+                        <a href="/order/past">
+                            <button type="button" id="past_purchases" class="btn btn-outline-info">Past Purchases
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            {{#if  order_package_list}}
+                <table class="table table-hover table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Purchase Number</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{# each order_package_list}}
+                        <tr>
+                            <th scope="row" id="first-td">{{this.po_no}}
+                                <button type="button" id="single-button" class="btn btn-outline-secondary"
+                                        onclick="location.href='/order/{{this.po_no}}'">More
+                                </button>
+                            </th>
+                            <td>{{this.date}}</td>
+                            <td>{{this.po_amount}}</td>
+                            <td>{{this.status}}</td>
+                        </tr>
+
+                    {{/each}}
+                    </tbody>
+                </table>
+            {{else}}
+                <h1 id="no-order">There is no order.</h1>
+            {{/if}}
+        </div>
+    </div>
+</div>
